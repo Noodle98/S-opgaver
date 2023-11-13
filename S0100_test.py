@@ -15,7 +15,7 @@ I programkoden ændre teksten mellem anførselstegnene
 
 Commit filen til dit eget git-repository (commit betyder: sikkerhedskopier den aktuelle tilstand af dine filer som en ny version)
     Git, Commit (eller klik på det grønne flueben)
-    skriv en meningsfuld kommentar
+    skriv en meningsfuld kommentar: x
     klik på "commit and push" (push betyder: upload dette commit til github)
     push
 
