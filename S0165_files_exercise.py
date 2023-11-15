@@ -24,7 +24,8 @@ with open(myfile) as file:
     people_array = []
     lines = file.readlines()
     for line in lines:
-        print(line)
+        #print(line)
+        line = line.strip()
         person = line.split(" ")
         people_array.append(person)
     for x in people_array:
