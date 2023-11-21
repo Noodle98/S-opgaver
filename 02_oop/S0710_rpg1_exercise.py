@@ -32,20 +32,50 @@ class Character:
         self.attackpower = attackpower
 
     def __repr__(self):
-        return f"name: {self.name}. max health: {self.max_health}. current health: {self._current_health}. attackpower: {self.attackpower}"
+        return f"name: {self.name}. max health: {self.max_health}. current health: {self.get_current_health()}. attackpower: {self.attackpower}"
 
     def get_current_health(self):
         return self._current_health
 
-    def take_damage(self, x):
-        self._current_health -= x
+    def set_current_health(self, x):
+        self._current_health = x
 
-    def heal_damage(self, x):
-        if self._current_health + x < self.max_health:
-            self._current_health += x
+    def get_hit(self, damage):
+        self.set_current_health(self.get_current_health() - damage)
+
+    def get_healed(self, heal):
+        if self.get_current_health() + heal > self.max_health:
+            self.set_current_health(self.max_health)
         else:
-            self._current_health = self.max_health
+            self.set_current_health(self.get_current_health() + heal)
+    def hit(self, other_object):
+        damage = self.attackpower
+        other_object.get_hit(damage)
 
+
+class Healer(Character):
+    def __init__(self, name, max_health, _current_health, attackpower, healpower):
+        super().__init__(name, max_health, _current_health, attackpower)
+        self.attackpower = 0
+        self.healpower = healpower
+
+    def heal(self, other_object):
+        heal = self.healpower
+        other_object.get_healed(heal)
+
+
+
+warrior1 = Character("Zíva", 200, 200, 50)
+print(warrior1)
+warrior2 = Character("Nuddeldreng", 170, 170, 25)
+print(warrior2)
+warrior1.hit(warrior2)
+warrior2.hit(warrior1)
+print(warrior1)
+print(warrior2)
+druid1 = Healer("Noodlegrill", 140, 140, 0, 30)
+druid1.heal(warrior2)
+print(warrior2)
 
 
 
