@@ -23,7 +23,10 @@ class Miner():
     hunger = 0
     whisky = 0
     gold = 0
+    turn = 0
 
+    def __repr__(self):
+        return f"Dead: {self.dead()}. Gold: {self.gold}. Turn: {self.turn}"
     def sleep(self):
         self.sleepiness -= 10
         self.thirst += 1
@@ -54,3 +57,23 @@ class Miner():
         self.hunger -= 1
         self.whisky -= 1
 
+    def dead(self):
+        return self.sleepiness > 100 or self.thirst > 100 or self.hunger > 100
+
+    def play(self):
+        while not self.dead() and self.turn < 1000:
+            self.turn += 1
+            if self.sleepiness > 80:
+                self.sleep()
+            elif self.thirst > 80 and self.whisky < 1:
+                self.buy_whisky()
+            elif self.thirst > 80 and self.whisky > 0:
+                self.drink()
+            elif self.hunger >= 85:
+                self.eat()
+            else:
+                self.mine()
+
+morris = Miner()
+morris.play()
+print(morris)
