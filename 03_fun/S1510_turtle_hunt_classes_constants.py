@@ -75,6 +75,7 @@ Kun hvis du er nysgerrig og elsker detaljer:
 
 import turtle  # this imports a library called "turtle". A library is (someone else's) python code, that you can use in your own program.
 import random
+import math
 from S1520_turtle_hunt_service import distance, direction
 
 
@@ -90,11 +91,20 @@ class PlayerName1(turtle.Turtle):
         # positions[0] is the coordinate tuple of the prey. positions[0][0] is the x-coordinate of the prey.
         # positions[1], positions[2], positions[3] refer to the hunters.
         # for example is positions[3][1] the y-coordinate of the third hunter.
+        hunters_positions = [positions[1], positions[2], positions[3]]
+        prey_position = positions[0]
+        prey_to_hunter_distances = []
+        for hunter in hunters_positions:
+            prey_to_hunter_distances.append(distance(prey_position, hunter))
+
+        for distance_to_hunter in prey_to_hunter_distances:
+            if distance_to_hunter < 90:
+                2
 
         # Example for use of the service functions distance() and direction
         # print(f'{distance(positions[0], positions[1])=}   {direction(positions[0], positions[1])=}')  # print distance and direction from prey to hunter1
 
-        degree = 3  # When the turtle rotates the same amount each turn,  it will just run in a circle. Make this function smarter!
+        degree = round(random.randrange(-45, 45))  # When the turtle rotates the same amount each turn,  it will just run in a circle. Make this function smarter!
         self.orientation += degree
         self.orientation %= 360
         # print(self.orientation)
