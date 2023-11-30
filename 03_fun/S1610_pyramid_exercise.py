@@ -52,4 +52,33 @@ def pyramid(lines):
         #print(new_line)
     for list in all_numbers_lists:
         print(list)
+
+
+def pyramid2(lines, first_line):
+    all_numbers_lists = []
+    all_numbers_lists.append(first_line)
+    new_number = 1
+    for line in range(lines):
+        new_number += 1
+        new_line = []
+        numbers = all_numbers_lists[-1]
+        for x in range(len(numbers)):
+            # print(f"number spotted: {numbers[x]}")
+            try:
+                if numbers[x] + numbers[x + 1] == new_number:
+                    new_line.append(numbers[x])
+                    # print(numbers[x])
+                    new_line.append(new_number)
+                    # print(numbers[x] + 1)
+                else:
+                    new_line.append(numbers[x])
+            except IndexError:
+                new_line.append(numbers[x])
+        all_numbers_lists.append(new_line)
+
+        # print(new_line)
+    for list in all_numbers_lists:
+        print(list)
+
 pyramid(7)
+pyramid2(10, [1, 2, 0, 1])
