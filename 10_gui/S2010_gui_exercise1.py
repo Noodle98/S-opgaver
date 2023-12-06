@@ -28,16 +28,23 @@ class Main_window(tk.Tk):
 window = tk.Tk()
 window.title("my first GUI")
 window.geometry("150x200")
-frame = tk.Frame(window, borderwidth=1, border=10)
-frame.pack(fill="both", expand=True)
+frame = tk.LabelFrame(window, text="Container")
+# frame.pack(fill="both", expand=True)
+frame.grid(padx=(5, 10), pady=(10, 15))
 
 label_id = tk.Label(frame, text="Id")
 entry1 = tk.Entry(frame, width=5)
 button_create = tk.Button(frame, text="Create")
 
+# tree1 = tk.ttk.Treeview(window)
+# tree1.grid(row=0, column=0, columnspan=3, sticky="nsew")
+
 label_id.grid()
 entry1.grid()
 button_create.grid()
 
+# label_id.pack()
+# entry1.pack()
+# button_create.pack()
 
 window.mainloop()
