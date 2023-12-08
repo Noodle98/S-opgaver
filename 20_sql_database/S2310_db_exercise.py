@@ -76,15 +76,23 @@ def select_all(classparam):
         records = session.scalars(select(Customer))
         result = []
         for record in records:
-            print(record)
+            result.append(record)
     return result
 
+def get_record(classparam, record_id):  # return the record in classparams table with a certain id   https://docs.sqlalchemy.org/en/14/tutorial/data_select.html
+    with Session(engine) as session:
+        # in the background this creates the sql query "select * from persons where id=record_id" when called with classparam=Person
+        record = session.scalars(select(classparam).where(classparam.id == record_id)).first()
+    return record
 
 engine = create_engine(Database, echo=False, future=True)
 Base.metadata.create_all(engine)
 
-#create_test_data()
+create_test_data()
 
-select_all(Customer)
-#dele = Database.customers.delete().where(id > 3)
-#engine.execute(dele)
+records = select_all(Customer)
+for record in records:
+    print(record)
+
+print(get_record(Customer, 2))
+
