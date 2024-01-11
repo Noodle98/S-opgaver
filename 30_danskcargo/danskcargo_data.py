@@ -70,7 +70,7 @@ class Transport(Base):
 
     def valid(self):
         try:
-            value = int(self.date)
+            value = int(self.container_id)
         except ValueError:
             return False
         return value >= 0
