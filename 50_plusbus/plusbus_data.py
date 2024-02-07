@@ -11,7 +11,7 @@ class Kunder(Base):
     kontakt = Column(String)
 
     def __repr__(self):  # Optional. Only for test purposes.
-        return f"Kunder({self.efternavn=:4}    {self.kontakt=:5})"
+        return f"Kunder({self.efternavn}    {self.kontakt})"
 
     def convert_to_tuple(self):  # Convert Kunder to tuple
         return self.efternavn, self.kontakt
@@ -37,7 +37,7 @@ class Rejser(Base):
     pladskapacitet = Column(Integer)
 
     def __repr__(self):  # Optional. Only for test purposes.
-        return f"Rejser({self.rute=:4}    {self.dato=:5}     {self.pladskapacitet=:6})"
+        return f"Rejser({self.rute}    {self.dato}     {self.pladskapacitet})"
 
     def convert_to_tuple(self):  # Convert Rejser to tuple
         return self.rute, self.dato, self.pladskapacitet
