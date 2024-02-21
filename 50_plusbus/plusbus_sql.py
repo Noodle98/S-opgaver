@@ -44,15 +44,15 @@ def select_all(classparam):  # https://docs.sqlalchemy.org/en/14/tutorial/data_s
     return result
 
 
-
-# region kunder
-def get_record_kunder(classparam, record_id):  # https://docs.sqlalchemy.org/en/14/tutorial/data_select.html
+def get_record(classparam, record_id):  # https://docs.sqlalchemy.org/en/14/tutorial/data_select.html
     # return the record in classparams table with a certain id
     with Session(engine) as session:
-        record = session.scalars(select(classparam).where(classparam.kontakt == record_id)).first()  # very useful for converting into our data class
+        record = session.scalars(select(classparam).where(classparam.id == record_id)).first()  # very useful for converting into our data class
     return record
 
 
+
+# region kunder
 def create_record_kunder(record):
     with Session(engine) as session: # https://docs.sqlalchemy.org/en/14/tutorial/orm_data_manipulation.html#orm-enabled-update-statements
         # create a record in the database

@@ -7,72 +7,74 @@ Base = declarative_base()
 
 class Kunder(Base):
     __tablename__ = "kunder"
-    efternavn = Column(String, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    efternavn = Column(String)
     kontakt = Column(String)
 
     def __repr__(self):  # Optional. Only for test purposes.
-        return f"Kunder({self.efternavn}    {self.kontakt})"
+        return f"Kunder({self.id}    {self.efternavn}    {self.kontakt})"
 
     def convert_to_tuple(self):  # Convert Kunder to tuple
-        return self.efternavn, self.kontakt
+        return self.id, self.efternavn, self.kontakt
+
     def valid(self):
         try:
-            value = self.kontakt
-            if value == "-":
-                return False
+            value = int(self.id)
         except ValueError:
             return False
-        return value
+        return value >= 0
 
     @staticmethod
     def convert_from_tuple(tuple_):  # Convert tuple to Kunder
-        kunder = Kunder(efternavn=tuple_[0], kontakt=tuple_[1])
+        kunder = Kunder(id=tuple_[0], efternavn=tuple_[1], kontakt=tuple_[2])
         return kunder
 
 
 class Rejser(Base):
     __tablename__ = "rejser"
-    rute = Column(String, primary_key=True)
+    id = Column(Integer, primary_key=True)
+    rute = Column(String)
     dato = Column(Date)
     pladskapacitet = Column(Integer)
 
     def __repr__(self):  # Optional. Only for test purposes.
-        return f"Rejser({self.rute}    {self.dato}     {self.pladskapacitet})"
+        return f"Rejser({self.id}    {self.rute}    {self.dato}     {self.pladskapacitet})"
 
     def convert_to_tuple(self):  # Convert Rejser to tuple
-        return self.rute, self.dato, self.pladskapacitet
+        return self.id, self.rute, self.dato, self.pladskapacitet
     def valid(self):
         try:
-            value = int(self.pladskapacitet)
+            value = int(self.id)
         except ValueError:
             return False
         return value >= 0
 
     @staticmethod
     def convert_from_tuple(tuple_):  # Convert tuple to Rejser
-        rejser = Rejser(rute=tuple_[0], dato=tuple_[1], pladskapacitet=tuple_[2])
+        rejser = Rejser(id=tuple_[0], rute=tuple_[1], dato=tuple_[2], pladskapacitet=tuple_[3])
         return rejser
 
 
 class Bookinger(Base):
     __tablename__ = "bookinger"
-    kunde_id = Column(Integer, primary_key=True)
-    rejse_id = Column(Integer)
+    id = Column(Integer, primary_key=True)
+    kunde_id = Column(Integer, ForeignKey("kunder.id"), nullable=False)
+    rejse_id = Column(Integer, ForeignKey("rejser.id"), nullable=False)
     pladser = Column(Integer)
 
     def __repr__(self):  # Optional. Only for test purposes.
-        return f"Bookinger({self.kunde_id=:4}    {self.rejse_id=:5}     {self.pladser=:6})"
+        return f"Bookinger({self.id=:4}    {self.kunde_id=:}    {self.rejse_id=:}     {self.pladser=:5})"
 
     def convert_to_tuple(self):  # Convert Bookinger to tuple
-        return self.kunde_id, self.rejse_id, self.pladser
+        return self.id, self.kunde_id, self.rejse_id, self.pladser
     def valid(self):
         try:
-            value = int(self.kunde_id)
+            value = int(self.id)
         except ValueError:
             return False
         return value >= 0
 
     @staticmethod
     def convert_from_tuple(tuple_):  # Convert tuple to Bookinger
-        bookinger = Rejser(kunde_id=tuple_[0], rejse_id=tuple_[1], pladser=tuple_[2])
+        bookinger = Rejser(id=tuple_[0], kunde_id=tuple_[1], rejse_id=tuple_[2], pladser=tuple_[3])
         return bookinger
