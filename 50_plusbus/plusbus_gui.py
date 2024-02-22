@@ -43,9 +43,21 @@ tree_scrollbar_kunder.config(command=tree_kunder.yview)
 
 #treeview columns
 tree_kunder.column('#0', width=0, stretch=tk.NO)
+tree_kunder.column("id", width=35, anchor=tk.E)
 tree_kunder.column("efternavn", width=150, anchor=tk.E)
 tree_kunder.column("kontakt", width=200, anchor=tk.E)
 
 tree_kunder.heading('#0', text="", anchor=tk.W)
+tree_kunder.heading("id", text="Id", anchor=tk.CENTER)
 tree_kunder.heading("efternavn", text="Efternavn", anchor=tk.CENTER)
 tree_kunder.heading("kontakt", text="Kontakt", anchor=tk.CENTER)
+
+# frame for labels and enries
+frame1_kunder = tk.Frame(label_frame_kunder)
+frame1_kunder.grid(padx=(0, 10), pady=(10, 15))
+
+# labels
+label_kunder_id = tk.Label(frame1_kunder, text="Id")
+label_kunder_efternavn = tk.Label(frame1_kunder, text="Efternavn")
+
+
