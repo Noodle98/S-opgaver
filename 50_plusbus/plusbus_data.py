@@ -76,5 +76,5 @@ class Bookinger(Base):
 
     @staticmethod
     def convert_from_tuple(tuple_):  # Convert tuple to Bookinger
-        bookinger = Rejser(id=tuple_[0], kunde_id=tuple_[1], rejse_id=tuple_[2], pladser=tuple_[3])
+        bookinger = Bookinger(id=tuple_[0], kunde_id=tuple_[1], rejse_id=tuple_[2], pladser=tuple_[3])
         return bookinger
