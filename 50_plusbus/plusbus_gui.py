@@ -6,6 +6,7 @@ import plusbus_sql as pbsql
 import plusbus_func as pbf
 
 
+# region common functions
 def read_table(tree, class_):  # fill tree from database
     count = 0  # Used to keep track of odd and even rows, because these will be colored differently.
     result = pbsql.select_all(class_)  # Read all containers from database
@@ -23,6 +24,14 @@ def empty_treeview(tree):  # Clear treeview table
 def refresh_treeview(tree, class_):  # Refresh treeview table
     empty_treeview(tree)  # Clear treeview table
     read_table(tree, class_)
+
+# endregion common functions
+
+
+# region kunder
+
+
+
 
 
 # main window
@@ -98,6 +107,10 @@ entry_kunder_kontakt.grid(column=2, row=1, padx=8)
 # frame for buttons
 frame2_kunder = tk.Frame(label_frame_kunder)
 frame2_kunder.grid(padx=(5, 10), pady=(0, 15))
+
+
+# buttons
+button_kunder_create = tk.Button(frame2_kunder, text="Create", command=lambda:create_kunder(tree_kunder, read_kunder_entries()))
 
 
 if __name__ == "__main__":  # Executed when invoked directly. We use this so main_window.mainloop() does not keep our unit tests from running.
