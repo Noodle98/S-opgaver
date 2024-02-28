@@ -20,15 +20,13 @@ Database = 'sqlite:///plusbus.db'  # first part: database type, second part: fil
 def create_test_data():  # Optional. Used to test database functions before gui is ready.
     with Session(engine) as session:
         new_items = []
-        new_items.append(Kunder(efternavn="Hansen", kontakt="ehansen@gmail.com"))
-        new_items.append(Kunder(efternavn="Lund", kontakt="uulund@gmail.com"))
-        new_items.append(Kunder(efternavn="Rasmussen", kontakt="+4572189485"))
-        new_items.append(Rejser(rute="Roskilde - Vordingborg", dato= date(day=5, month=7, year=2024), pladskapacitet=25))
-        new_items.append(Rejser(rute="Høje-Taastrup - Jönköping", dato= date(day=4, month=8, year=2024), pladskapacitet=25))
-        new_items.append(Rejser(rute="Aarhus - Berlin", dato= date(day=20, month=6, year=2024), pladskapacitet=30))
-        new_items.append(Bookinger(kunde_id=0, rejse_id=0, pladser=4))
-        new_items.append(Bookinger(kunde_id=1, rejse_id=1, pladser=2))
-        new_items.append(Bookinger(kunde_id=2, rejse_id=2, pladser=4))
+        #new_items.append(Kunder(efternavn="Hansen", kontakt="ehansen@gmail.com"))
+        #new_items.append(Kunder(efternavn="Lund", kontakt="uulund@gmail.com"))
+        #new_items.append(Kunder(efternavn="Rasmussen", kontakt="+4572189485"))
+        #new_items.append(Rejser(rute="Roskilde - Vordingborg", dato=date(day=5, month=7, year=2024), pladskapacitet=25))
+        #new_items.append(Rejser(rute="Høje-Taastrup - Jönköping", dato=date(day=4, month=8, year=2024), pladskapacitet=25))
+        #new_items.append(Rejser(rute="Aarhus - Berlin", dato=date(day=20, month=6, year=2024), pladskapacitet=30))
+        #new_items.append(Bookinger(kunde_id=2, rejse_id=1, pladser=4))
         session.add_all(new_items)
         session.commit()
 
@@ -132,10 +130,10 @@ if __name__ == "__main__":  # Executed when invoked directly
     engine = create_engine(Database, echo=False, future=True)
     Base.metadata.create_all(engine)
     # create_test_data()
-    # print(select_all(Kunder))
-    # print(get_record_kunder(Kunder, 2))
+    print(select_all(Bookinger))
+    print(get_record(Bookinger, 2))
 else:  # Executed when imported
     engine = create_engine(Database, echo=False, future=True)  # https://docs.sqlalchemy.org/en/14/tutorial/engine.html   The start of any SQLAlchemy application is an object called the Engine. This object acts as a central source of connections to a particular database, providing both a factory as well as a holding space called a connection pool for these database connections. The engine is typically a global object created just once for a particular database server, and is configured using a URL string which will describe how it should connect to the database host or backend.
     Base.metadata.create_all(engine)
 
-create_test_data()
+#create_test_data()
