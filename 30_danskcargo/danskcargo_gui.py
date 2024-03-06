@@ -27,8 +27,8 @@ def get_data_to_entries_container():
     entry_destination_container.insert(0, values[2])
 
 
-def click_data(e):
-    get_data_to_entries()
+def click_data_container(e):
+    get_data_to_entries_container()
 
 
 def read_container_entries():  # Read content of entry boxes
@@ -82,28 +82,28 @@ def click_data_aircraft(e):
     get_data_to_entries_aircraft()
 
 def read_aircraft_entries():  # Read content of entry boxes
-    return entry_id_container.get(), entry_weight_container.get(), entry_destination_container.get()
+    return entry_id_aircraft.get(), entry_max_cargo_weight_aircraft.get(), entry_registration_aircraft.get()
 
 
 def create_aircraft(tree, record):  # add new tuple to database
-    container = dcd.Container.convert_from_tuple(record)  # Convert tuple to Container
-    dcsql.create_record(container)  # Update database
-    clear_container_entries()  # Clear entry boxes
-    refresh_treeview(tree, dcd.Container)  # Refresh treeview table
+    aircraft = dcd.Aircraft.convert_from_tuple(record)  # Convert tuple to Container
+    dcsql.create_record(aircraft)  # Update database
+    clear_aircraft_entries()  # Clear entry boxes
+    refresh_treeview(tree, dcd.Aircraft)  # Refresh treeview table
 
 
 def update_aircraft(tree, record):  # update tuple in database
-    container = dcd.Container.convert_from_tuple(record)  # Convert tuple to Container
-    dcsql.update_container(container)  # Update database
-    clear_container_entries()  # Clear entry boxes
-    refresh_treeview(tree, dcd.Container)  # Refresh treeview table
+    aircraft = dcd.Aircraft.convert_from_tuple(record)  # Convert tuple to Container
+    dcsql.update_aircraft(aircraft)  # Update database
+    clear_aircraft_entries()  # Clear entry boxes
+    refresh_treeview(tree, dcd.Aircraft)  # Refresh treeview table
 
 
 def delete_aircraft(tree, record):  # delete tuple in database
-    container = dcd.Container.convert_from_tuple(record)  # Convert tuple to Container
-    dcsql.delete_soft_container(container)  # Update database
-    clear_container_entries()  # Clear entry boxes
-    refresh_treeview(tree, dcd.Container)  # Refresh treeview table
+    aircraft = dcd.Aircraft.convert_from_tuple(record)  # Convert tuple to Container
+    dcsql.delete_soft_aircraft(aircraft)  # Update database
+    clear_aircraft_entries()  # Clear entry boxes
+    refresh_treeview(tree, dcd.Aircraft)  # Refresh treeview table
 
 # endregion aircraft functions
 
@@ -358,10 +358,10 @@ frame2_aircraft = tk.Frame(label_frame_aircraft)
 frame2_aircraft.grid(padx=(5, 10), pady=(0, 15))
 
 # buttons
-button_create_aircraft = tk.Button(frame2_aircraft, text="Create", command=lambda: create_container(tree_aircraft, read_container_entries()))
-button_update_aircraft = tk.Button(frame2_aircraft, text="Update", command=lambda: update_container(tree_aircraft, read_container_entries()))
-button_delete_aircraft = tk.Button(frame2_aircraft, text="Delete", command=lambda: delete_container(tree_aircraft, read_container_entries()))
-button_clear_aircraft = tk.Button(frame2_aircraft, text="Clear Entry Boxes", command=lambda: clear_container_entries())
+button_create_aircraft = tk.Button(frame2_aircraft, text="Create", command=lambda: create_aircraft(tree_aircraft, read_aircraft_entries()))
+button_update_aircraft = tk.Button(frame2_aircraft, text="Update", command=lambda: update_aircraft(tree_aircraft, read_aircraft_entries()))
+button_delete_aircraft = tk.Button(frame2_aircraft, text="Delete", command=lambda: delete_aircraft(tree_aircraft, read_aircraft_entries()))
+button_clear_aircraft = tk.Button(frame2_aircraft, text="Clear Entry Boxes", command=lambda: clear_aircraft_entries())
 
 # buttons get grid functionality
 button_create_aircraft.grid(column=0, row=0, padx=(20, 4))
@@ -457,7 +457,7 @@ destination_list = ['oslo', 'chicago', 'milano', 'amsterdam']
 for x in range(len(id_list)):
     tree_container.insert(parent='', index=x, values=(id_list[x], weight_list[x], destination_list[x]))
 """
-tree_container.bind("<ButtonRelease-1>", click_data)
+tree_container.bind("<ButtonRelease-1>", click_data_container)
 tree_aircraft.bind("<ButtonRelease-1>", click_data_aircraft)
 tree_transport.bind("<ButtonRelease-1>", click_data_transport)
 
