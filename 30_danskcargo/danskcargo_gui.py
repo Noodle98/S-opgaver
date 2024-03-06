@@ -171,15 +171,14 @@ def update_transport(tree, record):  # add new tuple to database
 
 
 def delete_transport(tree, record):  # delete tuple in database
-    container = dcd.Container.convert_from_tuple(record)  # Convert tuple to Container
-    dcsql.delete_soft_container(container)  # Update database
+    transport = dcd.Transport.convert_from_tuple(record)  # Convert tuple to Transport
+    dcsql.delete_soft_transport(transport)  # Update database
     clear_container_entries()  # Clear entry boxes
-    refresh_treeview(tree, dcd.Container)  # Refresh treeview table
+    refresh_treeview(tree, dcd.Transport)  # Refresh treeview table
 
 # endregion transport functions
 
-
-# common functions
+# region common functions
 def read_table(tree, class_):  # fill tree from database
     count = 0  # Used to keep track of odd and even rows, because these will be colored differently.
     result = dcsql.select_all(class_)  # Read all containers from database
@@ -192,7 +191,6 @@ def read_table(tree, class_):  # fill tree from database
             count += 1
 
 
-# region common functions
 def empty_treeview(tree):  # Clear treeview table
     tree.delete(*tree.get_children())
 

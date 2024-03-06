@@ -119,11 +119,11 @@ def delete_hard_transport(transport):
         session.commit()  # makes changes permanent in database
 
 
-# def delete_soft_transport(transport):
-#     # soft delete a record in the transport table by setting its weight to -1 (see also method "valid" in the container class)
-#     with Session(engine) as session:
-#         session.execute(update(Transport).where(Transport.id == transport.id).values(date=-1, container_id=transport.container_id, aircraft_id=transport.aircraft_id))
-#         session.commit()  # makes changes permanent in database
+def delete_soft_transport(transport):
+    # soft delete a record in the transport table by setting its weight to -1 (see also method "valid" in the container class)
+    with Session(engine) as session:
+        session.execute(update(Transport).where(Transport.id == transport.id).values(date=-1, container_id=transport.container_id, aircraft_id=transport.aircraft_id))
+        session.commit()  # makes changes permanent in database
 # endregion transport
 
 if __name__ == "__main__":  # Executed when invoked directly
