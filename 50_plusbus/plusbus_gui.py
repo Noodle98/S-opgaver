@@ -162,9 +162,13 @@ def read_bookinger_entries():  # read content of entry boxes
 
 def create_bookinger(tree, record):  # add new tuple to database
     bookinger = pbd.Bookinger.convert_from_tuple(record)  # convert tuple to Bookinger
-    pbsql.create_record(bookinger)  # update database
-    clear_bookinger_entries()  # clear entry boxes
-    refresh_treeview(tree, pbd.Bookinger)  # refresh treeview table
+    pladser_ok = pbf.capacity_available(pbsql.get_record(pbd.Rejser, bookinger.rejse_id), bookinger)
+    if pladser_ok:
+        pbsql.create_record(bookinger)  # update database
+        clear_bookinger_entries()  # clear entry boxes
+        refresh_treeview(tree, pbd.Bookinger)  # refresh treeview table
+    else:
+        messagebox.showwarning("", "Not enough available pladser on rejse!")
 
 
 def update_bookinger(tree, record):  # update tuple in database
