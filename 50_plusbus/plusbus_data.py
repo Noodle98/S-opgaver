@@ -18,11 +18,12 @@ class Kunder(Base):
         return self.id, self.efternavn, self.kontakt
 
     def valid(self):
-        try:
-            value = int(self.id)
-        except ValueError:
+        value = self.efternavn
+        if (value == "-"):
             return False
-        return value >= 0
+        else:
+            return True
+
 
     @staticmethod
     def convert_from_tuple(tuple_):  # Convert tuple to Kunder
@@ -44,7 +45,7 @@ class Rejser(Base):
         return self.id, self.rute, self.dato, self.pladskapacitet
     def valid(self):
         try:
-            value = int(self.id)
+            value = int(self.pladskapacitet)
         except ValueError:
             return False
         return value >= 0
@@ -69,7 +70,7 @@ class Bookinger(Base):
         return self.id, self.kunde_id, self.rejse_id, self.pladser
     def valid(self):
         try:
-            value = int(self.id)
+            value = int(self.pladser)
         except ValueError:
             return False
         return value >= 0

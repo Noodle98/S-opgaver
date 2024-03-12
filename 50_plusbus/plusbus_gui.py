@@ -4,6 +4,7 @@ from tkinter import messagebox
 import plusbus_data as pbd
 import plusbus_sql as pbsql
 import plusbus_func as pbf
+from datetime import date
 
 
 # region common functions
@@ -104,7 +105,10 @@ def click_data_rejser(e):
     get_data_to_entries_rejser()
 
 def read_rejser_entries():  # read content of entry boxes
-    return entry_rejser_id.get(), entry_rejser_rute.get(), entry_rejser_dato.get(), entry_rejser_pladskapacitet.get()
+    splitted_date = entry_rejser_dato.get().split('-')
+    new_date = date(day=int(splitted_date[2]), month=int(splitted_date[1]), year=int(splitted_date[0]))
+
+    return entry_rejser_id.get(), entry_rejser_rute.get(), new_date, entry_rejser_pladskapacitet.get()
 
 
 def create_rejser(tree, record):  # add new tuple to database
@@ -115,7 +119,7 @@ def create_rejser(tree, record):  # add new tuple to database
 
 
 def update_rejser(tree, record):  # update tuple in database
-    rejser = pbd.Kunder.convert_from_tuple(record)  # convert tuple to Rejser
+    rejser = pbd.Rejser.convert_from_tuple(record)  # convert tuple to Rejser
     pbsql.update_rejser(rejser)  # update database
     clear_rejser_entries()  # clear entry boxes
     refresh_treeview(tree, pbd.Rejser)  # refresh treeview table

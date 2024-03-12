@@ -75,7 +75,7 @@ def delete_hard_kunder(kunder):
 def delete_soft_kunder(kunder):
     # soft delete a record in the kunder table by setting its kontakt to -1 (see also method "valid" in the kunder class)
     with Session(engine) as session:
-        session.execute(update(Kunder).where(Kunder.id == kunder.id).values(id=-1, efternavn=kunder.efternavn, kontakt=kunder.kontakt))
+        session.execute(update(Kunder).where(Kunder.id == kunder.id).values(efternavn="-", kontakt=kunder.kontakt))
         session.commit()  # makes changes permanent in database
 # endregion kunder
 
@@ -88,17 +88,17 @@ def update_rejser(rejser):  # https://docs.sqlalchemy.org/en/14/tutorial/orm_dat
         session.commit()  # makes changes permanent in database
 
 
-def delete_hard_kunder(rejser):
+def delete_hard_rejser(rejser):
     # delete a record in the rejser table
     with Session(engine) as session:
         session.execute(delete(Rejser).where(Rejser.id == rejser.id))
         session.commit()  # makes changes permanent in database
 
 
-def delete_soft_kunder(rejser):
+def delete_soft_rejser(rejser):
     # soft delete a record in the rejser table by setting its pladskapacitet to -1 (see also method "valid" in the kunder class)
     with Session(engine) as session:
-        session.execute(update(Rejser).where(Rejser.rute == rejser.rute).values(id=-1, dato=rejser.dato, pladskapacitet=rejser.pladskapacitet))
+        session.execute(update(Rejser).where(Rejser.id == rejser.id).values(rute=rejser.rute, dato=rejser.dato, pladskapacitet=-1))
         session.commit()  # makes changes permanent in database
 # endregion rejser
 
@@ -121,7 +121,7 @@ def delete_hard_bookinger(bookinger):
 def delete_soft_bookinger(bookinger):
     # soft delete a record in the bookinger table by setting its weight to -1 (see also method "valid" in the kunder class)
     with Session(engine) as session:
-        session.execute(update(Bookinger).where(Bookinger.id == bookinger.id).values(kunde_id=bookinger.kunde_id, rejse_id=bookinger.rejse_id, pladser=bookinger.pladser))#, date=bookinger.date, ))
+        session.execute(update(Bookinger).where(Bookinger.id == bookinger.id).values(kunde_id=bookinger.kunde_id, rejse_id=bookinger.rejse_id, pladser=-1))#, date=bookinger.date, ))
         session.commit()  # makes changes permanent in database
 # endregion bookinger
 
