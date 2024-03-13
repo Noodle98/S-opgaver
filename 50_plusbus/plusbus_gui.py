@@ -42,11 +42,12 @@ def get_data_to_entries_kunder():
     entry_kunder_kontakt.delete(0, tk.END)
 
     selected = tree_kunder.focus()
-    values = tree_kunder.item(selected, 'values')
+    if selected:
+        values = tree_kunder.item(selected, 'values')
 
-    entry_kunder_id.insert(0, values[0])
-    entry_kunder_efternavn.insert(0, values[1])
-    entry_kunder_kontakt.insert(0, values[2])
+        entry_kunder_id.insert(0, values[0])
+        entry_kunder_efternavn.insert(0, values[1])
+        entry_kunder_kontakt.insert(0, values[2])
 
 
 def click_data_kunder(e):
@@ -93,12 +94,13 @@ def get_data_to_entries_rejser():
     entry_rejser_pladskapacitet.delete(0, tk.END)
 
     selected = tree_rejser.focus()
-    values = tree_rejser.item(selected, 'values')
+    if selected:
+        values = tree_rejser.item(selected, 'values')
 
-    entry_rejser_id.insert(0, values[0])
-    entry_rejser_rute.insert(0, values[1])
-    entry_rejser_dato.insert(0, values[2])
-    entry_rejser_pladskapacitet.insert(0, values[3])
+        entry_rejser_id.insert(0, values[0])
+        entry_rejser_rute.insert(0, values[1])
+        entry_rejser_dato.insert(0, values[2])
+        entry_rejser_pladskapacitet.insert(0, values[3])
 
 
 def click_data_rejser(e):
@@ -149,12 +151,13 @@ def get_data_to_entries_bookinger():
     entry_bookinger_pladser.delete(0, tk.END)
 
     selected = tree_bookinger.focus()
-    values = tree_bookinger.item(selected, 'values')
+    if selected:
+        values = tree_bookinger.item(selected, 'values')
 
-    entry_bookinger_id.insert(0, values[0])
-    entry_bookinger_kunde_id.insert(0, values[1])
-    entry_bookinger_rejse_id.insert(0, values[2])
-    entry_bookinger_pladser.insert(0, values[3])
+        entry_bookinger_id.insert(0, values[0])
+        entry_bookinger_kunde_id.insert(0, values[1])
+        entry_bookinger_rejse_id.insert(0, values[2])
+        entry_bookinger_pladser.insert(0, values[3])
 
 
 def click_data_bookinger(e):
