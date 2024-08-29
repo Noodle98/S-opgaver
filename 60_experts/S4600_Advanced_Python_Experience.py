@@ -136,13 +136,29 @@ class Dummy:
 dummy1 = Dummy(999, 3)
 dummy2 = Dummy(777, 5)
 dummies = [dummy1, dummy2]
-print("before", dummies)
+#rint("before", dummies)
 dummies.sort(key=lambda x: x.a, reverse=False)
-print("after ", dummies)
+#print("after ", dummies)
 
 
 
 # Opgave:
 # Forklar hvad der sker i den følgende kodelinje.
-print((lambda x: x * 3)(5))
-#Lambda funktionen kalder x*3, og tager så (5) som argument, hvilket gør x til 5. Og 5x3 = 15, så derfor bliver der printet 15.
+#print((lambda x: x * 3)(5))
+#Lambda funktionen kalder x*3, og tager så (5) som argument, hvilket gør x til 5. Og 5x3 = 15, så derfor bliver der printet 15.4
+
+
+# Eksempel:
+# Kør programmet og leg med koden
+def infinite_sequence():
+    num = 0
+    while True:
+        yield num
+        num += 1
+
+
+gen = infinite_sequence()
+print(next(gen))
+print(next(gen))
+for some_iterator in [3, 12, 4]:
+    print("in a for loop", next(gen))
