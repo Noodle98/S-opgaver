@@ -1,3 +1,4 @@
+import os
 class Employee:
     def __init__(self, name, salary):
         self.name = name
@@ -145,7 +146,7 @@ dummies.sort(key=lambda x: x.a, reverse=False)
 # Opgave:
 # Forklar hvad der sker i den følgende kodelinje.
 #print((lambda x: x * 3)(5))
-#Lambda funktionen kalder x*3, og tager så (5) som argument, hvilket gør x til 5. Og 5x3 = 15, så derfor bliver der printet 15.4
+#Lambda funktionen kalder x*3, og tager så (5) som argument, hvilket gør x til 5. Og 5x3 = 15, så derfor bliver der printet 15.
 
 
 # Eksempel:
@@ -158,7 +159,14 @@ def infinite_sequence():
 
 
 gen = infinite_sequence()
-print(next(gen))
-print(next(gen))
-for some_iterator in [3, 12, 4]:
-    print("in a for loop", next(gen))
+#print(next(gen))
+#print(next(gen))
+#for some_iterator in [3, 12, 4]:
+    #print("in a for loop", next(gen))
+
+
+
+current_dir = os.getcwd()
+#print(f'{current_dir = }')
+
+
